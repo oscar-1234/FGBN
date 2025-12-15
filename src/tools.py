@@ -8,57 +8,72 @@ import json
 import os
 import traceback
 from pathlib import Path
+import streamlit as st
 
 # Import assoluto invece di relativo
 from src.config import E2B_API_KEY, DATA_DIR
 
-
 @tool
 def execute_code_in_sandbox(
     codice_python: str,
-    file_excel_path: str = "auto"
+    file_excel_path: str
 ) -> str:
     """
     Esegue codice Python generato dall'LLM in una sandbox E2B sicura.
     """
+    real_file_path = None
+    
     try:
-        if not DATA_DIR.exists():
-            return json.dumps({"success": False, "error": f"Directory dati non trovata: {DATA_DIR}"})
+        if file_excel_path:
+            clean_path = file_excel_path.strip().strip("'").strip('"')
+            path_obj = Path(clean_path)
+            if path_obj.exists():
+                real_file_path = path_obj
+
+        if not real_file_path:
+            return json.dumps({
+                "success": False, 
+                "error": "Impossibile trovare il file Excel. Il path non è stato passato correttamente dal prompt."
+            })
         
-        excel_files = sorted(DATA_DIR.glob("*.xlsx"), key=lambda p: p.stat().st_mtime, reverse=True)
-        if not excel_files:
-            return json.dumps({"success": False, "error": "Nessun file Excel trovato in app/data."})
-        
-        real_file_path = excel_files[0]
         remote_filename = "orario_input.xlsx"
-        
+
         os.environ["E2B_API_KEY"] = E2B_API_KEY
         
         with Sandbox(api_key=E2B_API_KEY) as sandbox:
             with open(real_file_path, 'rb') as f:
                 sandbox.files.write(remote_filename, f.read())
-            
+
+            if not isinstance(codice_python, str):
+                codice_python = str(codice_python)
+            codice_python = codice_python.replace('\x00', '')
+
+            sandbox.files.write("user_logic.py", codice_python)
+
             # Wrapper con struttura sicura
             codice_wrapper = f"""
 import pandas as pd
 import json
 import traceback
+import sys
 
-# 1. CODICE UTENTE (Definizioni funzioni, import, costanti)
-{codice_python}
+sys.path.append('.')
 
-# 2. LOGICA DI ESECUZIONE CONTROLLATA
+# LOGICA DI ESECUZIONE CONTROLLATA
 try:
+    # Import dinamico del codice utente
+    import user_logic
+
     # Setup dati
     remote_filename = '{remote_filename}'
     df = pd.read_excel(remote_filename, header=0)
     
-    # Verifica esistenza funzione
-    if 'calcola_sostituzioni' not in locals():
-        raise NameError("La funzione 'calcola_sostituzioni(df)' non è stata definita.")
+    # Verifica esistenza funzione nel modulo importato
+    if not hasattr(user_logic, 'calcola_sostituzioni'):
+        raise NameError("La funzione 'calcola_sostituzioni(df)' non è stata definita nel codice generato.")
     
     # Esecuzione
-    risultati = calcola_sostituzioni(df)
+    risultati = user_logic.calcola_sostituzioni(df)
     
     # Output
     print(json.dumps({{"success": True, "output": risultati}}, ensure_ascii=False))

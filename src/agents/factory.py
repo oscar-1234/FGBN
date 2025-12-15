@@ -25,7 +25,11 @@ def create_multi_agent_system(
     explainer_model: str = REASONING_MODEL,
     narrator_model: str = BASE_MODEL,
     orchestrator_model: str = REASONING_MODEL,
-    memory: Optional[Memory] = None
+    memory: Optional[Memory] = None,
+    file_path: str = "",
+    structure: str = "",
+    rules: str = "",
+    prev_subst: str = ""
 ) -> Agent:
     """
     Crea l'intero sistema multi-agente con tutti gli specialist coordinati dall'orchestrator.
@@ -44,7 +48,11 @@ def create_multi_agent_system(
     # Crea gli specialist agents
     code_agent = create_code_generator_agent(
         api_key=api_key,
-        model=code_model
+        model=code_model,
+        file_path=file_path,
+        structure=structure,
+        rules=rules,
+        prev_subst=prev_subst
     )
     
     explainer_agent = create_explainer_agent(

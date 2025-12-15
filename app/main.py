@@ -7,6 +7,7 @@ import streamlit as st
 import sys
 import json
 import re
+import uuid
 from pathlib import Path
 from pydantic import TypeAdapter, ValidationError
 from streamlit.runtime.scriptrunner import RerunException
@@ -26,6 +27,12 @@ from src.models import Sostituzione
 
 # Configurazione pagina
 st.set_page_config(**PAGE_CONFIG)
+
+# Inizializza ID sessione univoco
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+
+session_id = st.session_state.session_id
 
 # Inizializza managers
 session = SessionManager()
@@ -52,14 +59,14 @@ if not session.is_configured():
         regole = st.text_area(
             "Regole Sostituzione",
             value=TEMPLATES[template_choice]["regole"],
-            height=200
+            height=150
         )
         
         if st.form_submit_button("🚀 Avvia Sistema", use_container_width=True):
             if not uploaded_file:
                 st.error("⚠️ Manca il file Excel!")
             else:
-                file_path = save_uploaded_file(uploaded_file, DATA_DIR)
+                file_path = save_uploaded_file(uploaded_file, DATA_DIR, session_id)
                 session.setup({
                     "file_path": str(file_path),
                     "file_name": uploaded_file.name,
@@ -158,10 +165,18 @@ else:
                     from src.config import OPENAI_API_KEY
                     
                     memory = memory_manager.get_memory()
-                    
+
+                    prev_subst = ""                
+                    if memory_manager.has_substitutions():
+                        prev_subst = memory_manager.get_substitutions_summary()
+
                     orchestrator = create_multi_agent_system(
                         api_key=OPENAI_API_KEY,
-                        memory=memory
+                        memory=memory,
+                        file_path=session.get('file_path'),
+                        structure=session.get('struttura'),
+                        rules=session.get('regole'),
+                        prev_subst=prev_subst
                     )
                     
                     # =========================================
@@ -170,20 +185,8 @@ else:
                     full_prompt = f"""
 RICHIESTA UTENTE:
 {prompt}
-
-STRUTTURA DATI:
-{session.get('struttura')}
-
-REGOLE ATTIVE:
-{session.get('regole')}
-
-CONTEXT SOSTITUZIONI PRECEDENTI:
 """
-                    # Aggiungi context sostituzioni se presenti
-                    if memory_manager.has_substitutions():
-                        full_prompt += f"""
-{memory_manager.get_substitutions_summary()}
-"""
+
                     if debug_mode:
                         st.info("📨 Prompt inviato all'orchestrator")
                         with st.expander("Vedi prompt completo"):

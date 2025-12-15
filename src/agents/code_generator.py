@@ -12,7 +12,14 @@ from src.tools import execute_code_in_sandbox
 from src.models import Sostituzione
 
 
-def create_code_generator_agent(api_key: str, model: str = "gpt-4o") -> Agent:
+def create_code_generator_agent(
+    api_key: str,
+    model: str = "gpt-4o",
+    file_path: str = "",
+    structure: str = "",
+    rules: str = "",
+    prev_subst: str = ""
+    ) -> Agent:
     """
     Crea l'agente specializzato nella generazione di codice Python.
     """
@@ -27,8 +34,12 @@ def create_code_generator_agent(api_key: str, model: str = "gpt-4o") -> Agent:
     }
     schema_str = json.dumps(target_schema, indent=2)
 
-    # Inietta la variabile schema_str dentro il template importato
+    # Inietta le variabili dentro il template importato
     formatted_system_prompt = CODE_GENERATOR_SYSTEM_PROMPT.format(
+        file_path=file_path,
+        structure=structure,
+        rules=rules,
+        prev_subst=prev_subst,
         schema_str=schema_str
     )
 

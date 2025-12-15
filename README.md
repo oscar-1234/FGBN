@@ -27,7 +27,7 @@ Quando un elfo si ammala, chi copre il suo turno? Questo sistema usa AI generati
 
 ### Prerequisiti
 
-- Python 3.9+
+- Python 3.10+ (Testato su 3.12)
 - Account OpenAI ([ottieni API key](https://platform.openai.com/api-keys))
 - Account E2B ([ottieni API key](https://e2b.dev/dashboard))
 

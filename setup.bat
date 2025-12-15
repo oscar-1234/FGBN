@@ -7,7 +7,7 @@ echo.
 REM Controlla Python
 python --version >nul 2>&1
 if errorlevel 1 (
-    echo Python non trovato! Installa Python 3.9+ da python.org
+    echo Python non trovato! Installa Python 3.10 o superiore da python.org
     pause
     exit /b 1
 )
