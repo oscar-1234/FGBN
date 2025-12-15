@@ -1,11 +1,14 @@
 version: 2
 updates:
-  # Esempio per npm (Node.js)
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
-    
-  # Esempio per GitHub Actions
+    groups:
+      dependencies:
+        patterns:
+          - "*"
+  
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
