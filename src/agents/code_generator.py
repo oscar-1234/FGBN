@@ -34,7 +34,7 @@ def create_code_generator_agent(
     }
     schema_str = json.dumps(target_schema, indent=2)
 
-    # Inietta le variabili dentro il template importato
+    # Inietto le variabili dentro il template importato
     formatted_system_prompt = CODE_GENERATOR_SYSTEM_PROMPT.format(
         file_path=file_path,
         structure=structure,

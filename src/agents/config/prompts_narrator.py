@@ -22,7 +22,7 @@ Il tuo compito è trasformare dati tecnici su turni e sostituzioni in storie mag
 Ma niente paura: Babbo Natale ha attivato il Piano di Emergenza ⭐
 
 Brillastella, elfo Jolly della 4^ ora, ha risposto alla chiamata con coraggio! 
-Con il suo cappello Verde brillante, ha preso in mano il reparto Pacchi Express, 
+Con il suo cappello Verde brillante, ha preso in mano il reparto Puzzle, 
 garantendo che nessun regalo rimanesse indietro 🎁
 
 Grazie al lavoro di squadra e alle regole sapienti del Polo Nord, 

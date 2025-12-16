@@ -13,35 +13,35 @@ templates:
         - O: Numero ora del turno (1-6)
 
       Valori nelle celle turni:
-      - Codice reparto (es. 'TR', 'PE', 'CM') = elfo assegnato a quel reparto in quell'ora
+      - Codice reparto (es. 'Trenini', 'Robot', 'Costruzioni') = elfo assegnato a quel reparto in quell'ora
       - 'Jolly' = elfo disponibile per sostituzioni
       - 'RM' = fuori a cercare materiali (non disponibile)
       - 'Carb' = gestisce regali bimbi cattivi (non disponibile)
-      - 'ABS - XX' = elfo assente dal reparto XX
-      - 'SUB - XX' = elfo sostituisce nel reparto XX
+      - 'ABS - XYZ' = elfo assente dal reparto XYZ
+      - 'SUB - XYZ' = elfo sostituisce nel reparto XYZ
       - Cella vuota tra due celle assegnate = 'Pausa pizza' (richiamabile) (le celle assegnate
-      non possono essere ' ', 'Jolly', 'RM', 'Carb' e 'ABS - XX')
+      non possono essere ' ', 'Jolly', 'RM', 'Carb' e 'ABS - XYZ')
     
     regole: |
       REGOLA 'Assistente asseganto a stesso reparto':
       Cappello Verde nello stesso reparto sostituisce Cappello Rosso
       Se un elfo Cappello Rosso è assente e un Cappello Verde è già assegnato allo stesso
       reparto in quell'ora, il Verde prende la responsabilità totale.
-      Esempio: Lampogio (Rosso) è assente nel reparto 'CM' alla 4^ ora ('ABS - CM'). Spruzzo
-      (Verde) è assegnato a 'CM' nella 4^ ora. Quindi Spruzzo sostituisce ('SUB - CM').
+      Esempio: Lampogio (Rosso) è assente nel reparto 'Costruzioni' alla 4^ ora ('ABS - Costruzioni'). Spruzzo
+      (Verde) è assegnato a 'Costruzioni' nella 4^ ora. Quindi Spruzzo sostituisce ('SUB - Costruzioni').
       
       REGOLA 'Ora Jolly': Gli elfi 'Jolly' sono i primi candidati a sostituire
-      Esempio: Se Scintillino è assente ('ABS - PE') alla 4^ ora e Brillastella ha 'Jolly'
-      nella 4^ ora, allora Brillastella sostituisce ('SUB - PE').
+      Esempio: Se Scintillino è assente ('ABS - Robot') alla 4^ ora e Brillastella ha 'Jolly'
+      nella 4^ ora, allora Brillastella sostituisce ('SUB - Robot').
       
       REGOLA 'Ora Pausa pizza': Gli elfi in 'Pausa pizza' possono essere chiamati
       Una 'Pausa pizza' è un'ora vuota tra due ore assegnate (le ore assegnate
-      NON possono essere ' ', 'Jolly', 'RM', 'Carb' e 'ABS - XX').
-      Esempio Ok: Se Lampogio è assente ('ABS - CM') alla 3^ ora e Fulgor ha la 2^ ora
-      assegnata a 'RG' e la 4^ ora assegnata a 'LC' (quindi 3^ ora vuota), Fulgor può
-      sostituire ('SUB - CM').
-      Esempio Ko: Se Pignaferma è assente ('ABS - RG') alla 3^ ora e Rametto ha la 2^ ora
-      assegnata a 'RM' e la 4^ ora assegnata a 'PG' (quindi 3^ ora vuota MA l'ora adiacente è 'RM'),
+      NON possono essere ' ', 'Jolly', 'RM', 'Carb' e 'ABS - XYZ').
+      Esempio Ok: Se Lampogio è assente ('ABS - Costruzioni') alla 3^ ora e Fulgor ha la 2^ ora
+      assegnata a 'Robot' e la 4^ ora assegnata a 'Libri' (quindi 3^ ora vuota), Fulgor può
+      sostituire ('SUB - Costruzioni').
+      Esempio Ko: Se Pignaferma è assente ('ABS - Robot') alla 3^ ora e Rametto ha la 2^ ora
+      assegnata a 'RM' e la 4^ ora assegnata a 'Puzzle' (quindi 3^ ora vuota MA l'ora adiacente è 'RM'),
       Fulgor è indisponibile alla sostituzione.
       
       **PRIORITÀ APPLICAZIONE REGOLE**: cerca soluzioni applicando le regole in questo ordine

@@ -57,7 +57,9 @@ def create_multi_agent_system(
     
     explainer_agent = create_explainer_agent(
         api_key=api_key,
-        model=explainer_model
+        model=explainer_model,
+        rules=rules,
+        prev_subst=prev_subst
     )
     
     narrator_agent = create_narrator_agent(

@@ -6,7 +6,12 @@ from datapizza.agents import Agent
 from datapizza.clients.openai import OpenAIClient
 from src.agents.config import EXPLAINER_SYSTEM_PROMPT
 
-def create_explainer_agent(api_key: str, model: str = "gpt-4o") -> Agent:
+def create_explainer_agent(
+    api_key: str, 
+    model: str = "gpt-4o",
+    rules: str = "",
+    prev_subst: str = ""
+    ) -> Agent:
     """
     Crea l'agente specializzato nello spiegare decisioni.
     
@@ -18,12 +23,18 @@ def create_explainer_agent(api_key: str, model: str = "gpt-4o") -> Agent:
         Agent configurato per spiegazioni
     """
     client = OpenAIClient(api_key=api_key, model=model)
-    
+
+    # Inietto le variabili dentro il template importato
+    formatted_system_prompt = EXPLAINER_SYSTEM_PROMPT.format(
+        rules=rules,
+        prev_subst=prev_subst
+    )
+
     agent = Agent(
         name="explainer",
         client=client,
         tools=[],  # Nessun tool, pure reasoning
-        system_prompt=EXPLAINER_SYSTEM_PROMPT,
+        system_prompt=formatted_system_prompt,
         max_steps=2,
         terminate_on_text=True
     )

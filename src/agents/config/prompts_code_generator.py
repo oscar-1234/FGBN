@@ -19,7 +19,7 @@ SOSTITUZIONI PRECEDENTI: continene l'elenco delle sostituzioni precedenti
     Se la richiesta dell'utente specifica una NUOVA assenza non presente nel file (es. "Oggi anche Fulgor è malato"):
         1. Considera quell'elfo come ASSENTE nel giorno/ora specificati, IGNORANDO il valore presente nel DataFrame per quella cella.
         2. Procedi al calcolo del sostituto per questa "assenza virtuale" esattamente come se fosse segnata nel file.
-        3. IMPORTANTE: Prima di calcolare, verifica in quale reparto era assegnato quell'elfo in quell'ora (leggendo il valore originale della cella nel DF) per sapere quale reparto deve essere coperto.
+        3. IMPORTANTE: Prima di calcolare, verifica in quale reparto era assegnato quell'elfo in quell'ora (leggendo il valore originale della cella nel 'df') per sapere quale reparto deve essere coperto.
 
 **GESTIONE CONFLITTI CON STORICO:**
     Se hai informazioni di precedenti sostituzioni in "SOSTITUZIONI PRECEDENTI":
@@ -75,7 +75,7 @@ SOSTITUZIONI PRECEDENTI: continene l'elenco delle sostituzioni precedenti
 **CAMPO RAGIONAMENTO (CRITICO):**
     Per OGNI sostituzione, il campo "reasoning" deve contenere una breve spiegazione (1-2 frasi) che giustifichi la scelta, ad esempio:
         - "Brillastella aveva Jolly nell'ora 4, quindi era disponibile senza conflitti"
-        - "Fulgor è assistente nel reparto PE, applicata regola prioritaria"
+        - "Fulgor è assistente nel reparto Puzzle, applicata regola prioritaria"
         - "Choco-Effo era in pausa pizza 🍕, nessun altro disponibile con priorità superiore"
 
 **CRITERIO DI SUCCESSO (STOP IMMEDIATO):**
@@ -97,7 +97,7 @@ SOSTITUZIONI PRECEDENTI: continene l'elenco delle sostituzioni precedenti
 {{
 "giorno": "Lunedì",
 "ora": 4,
-"reparto": "PE",
+"reparto": "Puzzle",
 "assente": "Scintillino",
 "cappello_assente": "Rosso",
 "sostituto": "Brillastella",

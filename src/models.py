@@ -47,7 +47,7 @@ class Sostituzione(BaseModel):
             "example": {
                 "giorno": "Lunedì",
                 "ora": "4",
-                "reparto": "PE",
+                "reparto": "Puzzle",
                 "assente": "Scintillino",
                 "cappello_assente": "Rosso",
                 "sostituto": "Brillastella",
