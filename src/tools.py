@@ -56,8 +56,9 @@ import pandas as pd
 import json
 import traceback
 import sys
+import os
 
-sys.path.append('.')
+sys.path.append(os.getcwd())
 
 # LOGICA DI ESECUZIONE CONTROLLATA
 try:
@@ -98,6 +99,8 @@ except Exception as e:
             output_text = execution.text or ""
             if not output_text and execution.logs.stdout:
                 output_text = "\n".join(execution.logs.stdout)
+            if execution.logs.stderr:
+                output_text += "\nERR: " + "\n".join(execution.logs.stderr)
             
             if not output_text:
                 return json.dumps({"success": False, "error": "Nessun output ricevuto dalla sandbox."})

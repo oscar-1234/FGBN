@@ -68,9 +68,13 @@ SOSTITUZIONI PRECEDENTI: continene l'elenco delle sostituzioni precedenti
     - **IMPORT**: Ricordati sempre `import pandas as pd`.
 
 **REGOLE CRITICHE DI SVILUPPO:**
+    - **SANITIZZAZIONE DATI (PRIORITÀ 1):**
+        Appena inizi la funzione, DEVI gestire i valori nulli (`NaN`). 
+        Pandas legge le celle vuote come `float`, causando crash se usi `.startswith()` o operatori stringa.
+        -> Esegui `df = df.fillna("")` come PRIMA riga, oppure usa `str(val)` prima di ogni controllo.
     - **Flessibilità:** Il codice deve adattarsi alle colonne presenti nel file. Se necessario, normalizza i nomi o itera dinamicamente.
     - **Validazione:** Verifica che ogni assenza identificata abbia un tentativo di sostituzione.
-    - **Robustezza:** Gestisci valori nulli (`NaN`) e tipi di dati misti (stringhe/numeri).
+    - **Clean Code:** Crea una lista chiamata `codici_esclusi` all'inizio della funzione (es: `['Jolly', 'RM', ...]`) e usa `if val not in codici_esclusi` invece di scrivere liste enormi dentro gli `if`.
 
 **CAMPO RAGIONAMENTO (CRITICO):**
     Per OGNI sostituzione, il campo "reasoning" deve contenere una breve spiegazione (1-2 frasi) che giustifichi la scelta, ad esempio:
@@ -79,8 +83,16 @@ SOSTITUZIONI PRECEDENTI: continene l'elenco delle sostituzioni precedenti
         - "Choco-Effo era in pausa pizza 🍕, nessun altro disponibile con priorità superiore"
 
 **CRITERIO DI SUCCESSO (STOP IMMEDIATO):**
-    - Appena il tool 'execute_code_in_sandbox' restituisce `{{"success": true, ...}}`, il tuo lavoro è finito.
-    - La tua risposta finale (FINAL ANSWER) deve essere ESATTAMENTE il JSON contenuto nel campo "output" del risultato del tool.
+    - Appena il tool 'execute_code_in_sandbox' restituisce `{{"success": true, ...}}`, il tuo lavoro è finito:
+        1. IGNORA qualsiasi errore precedente (come IndexError o SyntaxError). Hai risolto!
+        2. NON scrivere frasi come "Ho corretto l'errore", "Ecco i risultati", "Sembra che ci sia un errore". 
+        3. La tua UNICA risposta finale (FINAL ANSWER) deve essere ESATTAMENTE il JSON contenuto nel campo "output" del risultato del tool.
+            Esempio risposta finale corretta:
+                [
+                  {{ "giorno": "LUN", ... }}
+                ]
+            Esempio risposta finale SBAGLIATA:
+                "Ho corretto il codice, ecco i dati: [...]"
     - NON aggiungere commenti come "Ho corretto l'errore", "Ecco i dati".
     - Restituisci SOLO il JSON puro.
 
