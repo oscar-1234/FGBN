@@ -52,3 +52,6 @@ logs/
 # Temp files
 *.tmp
 temp/
+
+# Eccezioni (File da includere)
+!app/assets/sample.xlsx

@@ -122,6 +122,19 @@ else:
             
             with st.expander("🧠 Memory Info"):
                 st.write(f"Conversazione: {memory_manager.get_conversation_length()} turni")
+
+                try:
+                    # Recupera l'oggetto memory grezzo
+                    mem_obj = memory_manager.get_memory()
+                    # Se è un oggetto datapizza.Memory, dovrebbe avere un metodo per vedere i messaggi
+                    st.write("Contenuto Memoria AI:")
+                    if hasattr(mem_obj, "to_dict"):
+                        st.json(mem_obj.to_dict())
+                    else:
+                        st.write(str(mem_obj))
+                except Exception as e:
+                    st.error(f"Impossibile leggere memoria: {e}")
+
                 st.write(f"Sostituzioni: {len(memory_manager.get_all_substitutions())}")
     
     # ---------------------------------------------------------
