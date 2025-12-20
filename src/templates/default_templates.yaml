@@ -23,7 +23,7 @@ templates:
       non possono essere ' ', 'Jolly', 'RM', 'Carb' e 'ABS - XYZ')
     
     regole: |
-      REGOLA 'Assistente asseganto a stesso reparto':
+      REGOLA 'Assistente assegnato a stesso reparto':
       Cappello Verde nello stesso reparto sostituisce Cappello Rosso
       Se un elfo Cappello Rosso è assente e un Cappello Verde è già assegnato allo stesso
       reparto in quell'ora, il Verde prende la responsabilità totale.
@@ -45,7 +45,7 @@ templates:
       Fulgor è indisponibile alla sostituzione.
       
       **PRIORITÀ APPLICAZIONE REGOLE**: cerca soluzioni applicando le regole in questo ordine
-        1) Prima Regola 'Assistente asseganto a stesso reparto'
+        1) Prima Regola 'Assistente assegnato a stesso reparto'
         2) Regola 'Ora Jolly'
         3) Regola 'Ora Pausa pizza'.
 
