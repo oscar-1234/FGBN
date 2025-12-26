@@ -17,14 +17,14 @@ import sys
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(BASE_DIR))
-from src.config import REASONING_MODEL, BASE_MODEL
+from src.config import CODE_MODEL, EXPLAINER_MODEL, NARRATOR_MODEL, ORCHESTRATOR_MODEL
 
 def create_multi_agent_system(
     api_key: str,
-    code_model: str = REASONING_MODEL,
-    explainer_model: str = REASONING_MODEL,
-    narrator_model: str = BASE_MODEL,
-    orchestrator_model: str = REASONING_MODEL,
+    code_model: str = CODE_MODEL,
+    explainer_model: str = EXPLAINER_MODEL,
+    narrator_model: str = NARRATOR_MODEL,
+    orchestrator_model: str = ORCHESTRATOR_MODEL,
     memory: Optional[Memory] = None,
     file_path: str = "",
     structure: str = "",

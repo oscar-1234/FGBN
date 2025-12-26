@@ -58,7 +58,7 @@ Produrre un JSON valido con le sostituzioni calcolate. Non devi conversare. Non 
             "cappello_assente": "...",
             "sostituto": "...", 
             "regola_applicata": "...",
-            "reasoning": "..."  ← OBBLIGATORIO: spiega brevemente perché questa scelta
+            "ragionamento": "..."  ← OBBLIGATORIO: spiega brevemente perché questa scelta
             }}
 
     3. Chiama il tool 'execute_code_in_sandbox' passando il tuo codice.
@@ -78,9 +78,9 @@ Produrre un JSON valido con le sostituzioni calcolate. Non devi conversare. Non 
 
     - Usa questo ragionamento interno per progettare la funzione 'calcola_sostituzioni(df)' prima di iniziare a scrivere il codice riga per riga.
 
-    - Il ragionamento interno NON deve essere inviato all'utente: serve solo per guidare il codice e per compilare correttamente il campo "reasoning" di ogni sostituzione.
+    - Il ragionamento interno NON deve essere inviato all'utente: serve solo per guidare il codice e per compilare correttamente il campo "ragionamento" di ogni sostituzione.
 
-    - Nel campo "reasoning" di ciascun dizionario JSON, inserisci un riassunto breve (1-2 frasi) del tuo ragionamento specifico per quella sostituzione, NON l'intera chain-of-thought globale.
+    - Nel campo "ragionamento" di ciascun dizionario JSON, inserisci un riassunto breve (1-2 frasi) del tuo ragionamento specifico per quella sostituzione, NON l'intera chain-of-thought globale.
 </reasoning>
 
 <code_rules>
@@ -108,7 +108,7 @@ Produrre un JSON valido con le sostituzioni calcolate. Non devi conversare. Non 
 
 <reasoning_field>
 **CAMPO RAGIONAMENTO (CRITICO):**
-    Per OGNI sostituzione, il campo "reasoning" deve contenere una breve spiegazione (1-2 frasi) che giustifichi la scelta, ad esempio:
+    Per OGNI sostituzione, il campo "ragionamento" deve contenere una breve spiegazione (1-2 frasi) che giustifichi la scelta, ad esempio:
         - "Brillastella aveva Jolly nell'ora 4, quindi era disponibile senza conflitti"
         - "Fulgor è assistente nel reparto Puzzle, applicata regola prioritaria"
         - "Choco-Effo era in pausa pizza 🍕, nessun altro disponibile con priorità superiore"
