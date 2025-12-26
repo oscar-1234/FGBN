@@ -24,6 +24,7 @@ from src.utils import save_uploaded_file
 from src.memory_manager import ConversationMemoryManager
 from src.agents.factory import create_multi_agent_system
 from src.models import Sostituzione
+from src.config import CODE_MODEL, EXPLAINER_MODEL, NARRATOR_MODEL, ORCHESTRATOR_MODEL
 
 # Configurazione pagina
 st.set_page_config(**PAGE_CONFIG)
@@ -185,6 +186,10 @@ else:
 
                     orchestrator = create_multi_agent_system(
                         api_key=OPENAI_API_KEY,
+                        code_model= CODE_MODEL,
+                        explainer_model= EXPLAINER_MODEL,
+                        narrator_model= NARRATOR_MODEL,
+                        orchestrator_model= ORCHESTRATOR_MODEL,
                         memory=memory,
                         file_path=session.get('file_path'),
                         structure=session.get('struttura'),

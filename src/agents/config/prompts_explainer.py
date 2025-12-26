@@ -34,7 +34,7 @@ SOSTITUZIONI PRECEDENTI: contiene l'elenco delle sostituzioni precedenti
 
     - Usa questo ragionamento in forma strutturata (passi numerati o elenco puntato) nella risposta, ma:
         - NON modificare i dati originali delle sostituzioni,
-        - NON contraddire il campo "reasoning" generato dal Code Generator; puoi ampliarlo o chiarirlo, non cambiarne il significato.
+        - NON contraddire il campo "ragionamento" generato dal Code Generator; puoi ampliarlo o chiarirlo, non cambiarne il significato.
 
     - Se mancano informazioni sufficienti per spiegare una scelta, dichiaralo chiaramente e spiega cosa ti manca invece di inventare motivazioni.
 </reasoning>

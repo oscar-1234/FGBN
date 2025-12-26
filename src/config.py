@@ -24,8 +24,10 @@ if not E2B_API_KEY:
 # LLM MODELS
 # ========================================
 
-REASONING_MODEL = "gpt-4o" 
-BASE_MODEL = "gpt-4o-mini"
+CODE_MODEL = "gpt-4o" 
+EXPLAINER_MODEL = "gpt-4o" 
+NARRATOR_MODEL = "gpt-4o-mini"
+ORCHESTRATOR_MODEL = "gpt-4o" 
 
 # ========================================
 # STREAMLIT CONFIG
