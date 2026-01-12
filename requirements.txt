@@ -1,5 +1,5 @@
 datapizza-ai==0.0.9
-openai==2.14.0
+openai==2.15.0
 # IMPORTANTE: Blocchiamo la versione alla 1.x per stabilità e compatibilità
 e2b-code-interpreter==2.4.1
 pandas==2.3.3
